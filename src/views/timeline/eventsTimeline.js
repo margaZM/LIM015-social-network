@@ -60,10 +60,10 @@ const addEventLike = () => {
             let newArrayLike;
             if (dataPost.arrLikes.includes(idUserAuth)) {
                 newArrayLike = dataPost.arrLikes.filter((item) => item !== idUserAuth);
-                imgLike.src = "../assets/images/svg/notlike.png";
+                imgLike.src = "../src/assets/images/svg/notlike.png";
             } else {
                 newArrayLike = [...dataPost.arrLikes, idUserAuth];
-                imgLike.src = "../assets/images/svg/like.png";
+                imgLike.src = "../src/assets/images/svg/like.png";
             }
             updatePost(idPost, { arrLikes: newArrayLike });
             countLike.innerText = newArrayLike.length; //actualiza el contador en la DOM
@@ -95,10 +95,10 @@ const addEventShowCategories = () => {
 const addEventComments = async() => {
     const allBtnComments = document.querySelectorAll(".btn-comments");
     allBtnComments.forEach((btn) => {
-        let flag = false;
+        let flag = false;//No le ha dado click al button
         btn.addEventListener("click", async(e) => {
             const idPost = e.target.dataset.id;
-            const infoUserAuth = JSON.parse(window.localStorage.getItem('infouser')); //linea 13 viewsComponenstTimeline
+            const infoUserAuth = JSON.parse(window.localStorage.getItem('infouser')); //linea 13 viewsComponenstTimeline obj
             const footerComments = document.querySelector("#footer-comments-" + idPost); //elemento padre comentarios
             const allUsersPost = await allUsers().then((response) => response); //import de getDataFirebase linea 12 
 
@@ -108,7 +108,7 @@ const addEventComments = async() => {
                 const dataPost = await getPost(idPost).then((response) => response.data());
                 const arrayComments = dataPost.arrComments;
 
-                if (arrayComments.length > 0) {
+                if (arrayComments.length > 0) {//Hay comentarios y los renderizo
                     arrayComments.forEach((element) => {
                         let arrayCommentsUser = element.split("--");
                         const userFriend = allUsersPost.find((element) => element.idUser == arrayCommentsUser[0]);
