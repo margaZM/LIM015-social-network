@@ -60,10 +60,10 @@ const addEventLike = () => {
             let newArrayLike;
             if (dataPost.arrLikes.includes(idUserAuth)) {
                 newArrayLike = dataPost.arrLikes.filter((item) => item !== idUserAuth);
-                imgLike.src = "../assets/images/svg/notlike.png";
+                imgLike.src = "../src/assets/images/svg/notlike.png";
             } else {
                 newArrayLike = [...dataPost.arrLikes, idUserAuth];
-                imgLike.src = "../assets/images/svg/like.png";
+                imgLike.src = "../src/assets/images/svg/like.png";
             }
             updatePost(idPost, { arrLikes: newArrayLike });
             countLike.innerText = newArrayLike.length; //actualiza el contador en la DOM
